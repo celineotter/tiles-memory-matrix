@@ -1,28 +1,29 @@
 {
-    "name": "tiles-memory-matrix",
-    "version": "1.0.0",
-    "description": "Memory game. In a 5*5 matrix, 9 tiles are randomly selected &amp; presented to the user for a short period of time before disappearing. The user must reconstruct the pattern to win the round.",
-    "main": "Gruntfile.js",
-    "dependencies": {
-        "angular": "^1.3.15",
-        "angular-ui-router": "^0.2.15",
-        "grunt": "^0.4.5",
-        "grunt-contrib-connect": "^0.10.1",
-        "jquery": "^2.1.4",
-        "lodash": "^3.9.1"
-    },
-    "devDependencies": {},
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/celineotter/tiles-memory-matrix.git"
-    },
-    "author": "",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/celineotter/tiles-memory-matrix/issues"
-    },
-    "homepage": "https://github.com/celineotter/tiles-memory-matrix#readme"
+  "name": "tiles-memory-matrix",
+  "version": "1.0.0",
+  "description": "Memory game. In a 5*5 matrix, 9 tiles are randomly selected &amp; presented to the user for a short period of time before disappearing. The user must reconstruct the pattern to win the round.",
+  "main": "Gruntfile.js",
+  "dependencies": {
+    "angular": "^1.3.15",
+    "angular-ui-router": "^0.2.15",
+    "grunt": "^0.4.5",
+    "grunt-contrib-connect": "^0.10.1",
+    "jquery": "^2.1.4",
+    "lodash": "^3.9.1",
+    "normalize.css": "^3.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/celineotter/tiles-memory-matrix.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/celineotter/tiles-memory-matrix/issues"
+  },
+  "homepage": "https://github.com/celineotter/tiles-memory-matrix#readme"
 }

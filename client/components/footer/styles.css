@@ -2,7 +2,6 @@
   position: absolute;
   bottom: 0;
   width: 100%;
-  /* Set the fixed height of the footer here */
   height: 60px;
   background-color: #515f6f;
   min-height: 1px;
@@ -16,14 +15,10 @@
   opacity: .75;
 }
 
-.footer > .container {
+.footer .container {
   padding-right: 15px;
   padding-left: 15px;
   text-align: center;
-}
-
-code {
-  font-size: 80%;
 }
 
 .footer-clear {

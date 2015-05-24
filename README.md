@@ -10,7 +10,7 @@ Tiles Memory Matrix is an interactive memory game.
     $ npm install
 
 # to run the app:
-   $ grunt connect
+    $ grunt connect
 
 # open browser:
     http://localhost:8000/

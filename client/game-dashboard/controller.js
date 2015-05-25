@@ -95,17 +95,17 @@ angular.module('memoryMatrixApp')
         },
 	    template: "<div class='tile' ng-class='{flash: tile.flash, incorrect: tile.isIncorrect, reveal: tile.isRevealed}' ng-click='highlightTile()'></div>",
         link: function ($scope, element, attrs) {
-			$scope.highlightTile = function() { debugger;
+			$scope.highlightTile = function() {
 
-				if ($scope.tile.secretSelected == false) {
+				if ($scope.tile.secretSelected === false) {
 					$scope.tile.isIncorrect = true;
-				} else if($scope.success[0] == 8) {
+				} else if($scope.success[0] === 8) {
 					$scope.tile.flash = true;
 				} else {
 					$scope.success[0]++;
 					$scope.tile.flash = true;
 				}
-			}
+			};
         }
 	};
 });

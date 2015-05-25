@@ -78,11 +78,11 @@ button:focus {
     outline: none;
 }
 
-.btn-left-margin {
+.btn-right-margin {
     margin-right: 5px;
 }
 
-.btn-right-margin {
+.btn-left-margin {
     margin-left: 5px;
 }
 

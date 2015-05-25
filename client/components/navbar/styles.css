@@ -5,8 +5,8 @@ nav {
 }
 
 .navbar-default {
-    background-color: #515f6f;
-    border-color: #485F75;
+    background-color: #E0E0E7;
+    border-color: #E0E0E7;
 }
 
 .navbar-fixed-top {
@@ -35,7 +35,7 @@ navbar .container {
     line-height: 100px;
     padding-top: 0;
     font-size: 30px;
-    color: #ecf0f1;
+    color: #815D74;
     text-decoration: none;
     background: 0 0;
 }

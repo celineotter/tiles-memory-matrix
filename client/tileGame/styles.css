@@ -1,0 +1,10 @@
+body {
+    background: #FFFFFF;
+    background: -moz-linear-gradient(top, #FFFFFF 0%, #F0F0F9) fixed;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #FFFFFF), color-stop(100%, #F0F0F9)) fixed;
+    background: -webkit-linear-gradient(top, #FFFFFF 0%, #F0F0F9) fixed;
+    background: -o-linear-gradient(top, #FFFFFF 0%, #F0F0F9) fixed;
+    background: -ms-linear-gradient(top, #FFFFFF 0%, #F0F0F9) fixed;
+    background: linear-gradient(to bottom, #FFFFFF 0%, #F0F0F9) fixed;
+    font-family: Helvetica, sans-serif;
+}

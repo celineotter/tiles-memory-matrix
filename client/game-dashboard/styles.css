@@ -37,6 +37,12 @@ body {
 .flash {
     background-color: yellow;
 }
+.incorrect {
+    background-color: red;
+}
+.reveal {
+    background-color: green;
+}
 
 button {
     color: #fff;

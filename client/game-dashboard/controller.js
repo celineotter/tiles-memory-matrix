@@ -90,10 +90,22 @@ angular.module('memoryMatrixApp')
 	    restrict: 'E',
 		scope: {
             tile: '=',
-            successCounter: '=',
+            success: '=',
             revealHidden: '='
         },
 	    template: "<div class='tile' ng-class='{flash: tile.flash, incorrect: tile.isIncorrect, reveal: tile.isRevealed}' ng-click='highlightTile()'></div>",
-	    link: function ($scope, element, attrs) {}
+        link: function ($scope, element, attrs) {
+			$scope.highlightTile = function() { debugger;
+
+				if ($scope.tile.secretSelected == false) {
+					$scope.tile.isIncorrect = true;
+				} else if($scope.success[0] == 8) {
+					$scope.tile.flash = true;
+				} else {
+					$scope.success[0]++;
+					$scope.tile.flash = true;
+				}
+			}
+        }
 	};
 });

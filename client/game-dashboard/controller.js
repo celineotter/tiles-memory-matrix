@@ -1,20 +1,20 @@
 angular.module('memoryMatrixApp')
-.controller('gameDashboardCtrl', function ($scope, $timeout) {
+.controller('gameDashboardCtrl', function ($scope, $timeout, $interval) {
 
-	$scope.userMessage = "";
-	var successMessage = "Good Job!";
-	var failureMessage = "Better luck next time";
+	$scope.userMessage = "- Welcome -";
+	var message = {success: "- Good Job -", fail: "- Better luck next time -"};
 
 	$scope.total = 25;
 	$scope.tileStatusList = [];
     var secretSelectList = [];
 	$scope.success  = {counter: 0};
+    var timeLeft = 5;
+    $scope.timer = {active: false};
 
     /* Populate tileStatusList on first load*/
     /* Each index represents the initial tile status in matrix*/
     var prepareNewGame = function (){
         var tile;
-        $scope.userMessage = '';
         $scope.success = {counter: 0};
 
         for (var i=0; i < $scope.total; i++) {
@@ -24,7 +24,6 @@ angular.module('memoryMatrixApp')
             $scope.tileStatusList[i].flash = false;
             $scope.tileStatusList[i].isIncorrect = false;
             $scope.tileStatusList[i].isRevealed = false;
-
         }
     };
 
@@ -65,47 +64,54 @@ angular.module('memoryMatrixApp')
                 preSelectedIndex = secretSelectList[counter];
                 $scope.tileStatusList[preSelectedIndex].flash = false;
             }
+
         }, 5000, 1);
 
     };
 
+    var countDown = function () {
+        $interval(function(numb){
+            if (timeLeft !== 1) {
+                $scope.userMessage = "- " + --timeLeft + " seconds left -";
+            } else {
+                timeLeft = 5;
+                $scope.userMessage = "- Start your selections now - ";
+                $scope.timer.active = false;
+            }
+        }, 1000, 5);
+    };
+
 
     $scope.newRound = function() {
+        if ($scope.timer.active) return;
+        $scope.timer.active = true;
+        countDown();
         prepareNewGame();
         secretSelectList = generateRandomsList();
         revealThenHideSelected();
     };
 
     $scope.endRound = function() {
+        if ($scope.timer.active) return;
         prepareNewGame();
+        $scope.userMessage = "- Start over -";
+    };
+
+    $scope.revealSuccess = function (success) {
+        if (success) {
+			$scope.userMessage = message.success;
+		} else {
+			$scope.userMessage = message.fail;
+			var index;
+
+			for (var i=0; i<9; i++) {
+				index = secretSelectList[i];
+				if (!$scope.tileStatusList[index].flash){
+					$scope.tileStatusList[index].isRevealed = true;
+				}
+			}
+		}
     };
 
     prepareNewGame();
-});
-
-
-angular.module('memoryMatrixApp')
-.directive('tile', function () {
-	return {
-	    restrict: 'E',
-		scope: {
-            tile: '=',
-            success: '=',
-            revealHidden: '='
-        },
-	    template: "<div class='tile' ng-class='{flash: tile.flash, incorrect: tile.isIncorrect, reveal: tile.isRevealed}' ng-click='highlightTile()'></div>",
-        link: function ($scope, element, attrs) {
-			$scope.highlightTile = function() {
-
-				if ($scope.tile.secretSelected === false) {
-					$scope.tile.isIncorrect = true;
-				} else if($scope.success[0] === 8) {
-					$scope.tile.flash = true;
-				} else {
-					$scope.success[0]++;
-					$scope.tile.flash = true;
-				}
-			};
-        }
-	};
 });

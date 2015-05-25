@@ -21,7 +21,7 @@ angular.module('memoryMatrixApp')
 
     /* Populate tileStatusList on first load*/
     /* Each index represents the initial tile status in matrix*/
-	MemoryGame.prototype.prepareNewGame = function (){
+	MemoryGame.prototype.prepareNewGame = function () {
         this._secretSelectList = [];
 		$scope.success.counter = 0;
 
@@ -35,14 +35,14 @@ angular.module('memoryMatrixApp')
         }
     };
 
-	MemoryGame.prototype.getRandomTile = function (){
+	MemoryGame.prototype.getRandomTile = function () {
         return Math.floor( Math.random() * this._total);
     };
 
-	MemoryGame.prototype.generateRandomsList = function (){
+	MemoryGame.prototype.generateRandomsList = function () {
         var target;
 
-        for (var i=0; i<9; i++){
+        for (var i=0; i<9; i++) {
 
             while (!target || this._secretSelectList.indexOf(target) !== -1) {
                 target = this.getRandomTile();
@@ -56,7 +56,7 @@ angular.module('memoryMatrixApp')
     /* Go through internally selected list */
     /* For each index value, temporarily flash associated tile */
     /* Once revealed, cancel their flash parameter */
-	MemoryGame.prototype.revealThenHideSelected = function() {
+	MemoryGame.prototype.revealThenHideSelected = function () {
         var index = 0, preSelectedIndex;
 
         while (index < this._secretSelectList.length) {
@@ -65,18 +65,18 @@ angular.module('memoryMatrixApp')
             index++;
         }
 
-        $timeout(function(){
+        $timeout((function () {
             while (index > 0) {
                 index--;
                 preSelectedIndex = this._secretSelectList[index];
                 $scope.tileStatusList[preSelectedIndex].flash = false;
             }
 
-        }.bind(this), 5000, 1);
+        }).bind(this), 5000, 1);
     };
 
 	MemoryGame.prototype.countDown = function () {
-        $interval(function(numb){
+        $interval((function (numb) {
             if (this._timeLeft !== 1) {
                 $scope.userMessage = "- " + --this._timeLeft + " seconds left -";
             } else {
@@ -84,7 +84,7 @@ angular.module('memoryMatrixApp')
                 $scope.userMessage = "- Start your selections now - ";
                 $scope.timer.active = false;
             }
-        }.bind(this), 1000, 5);
+        }).bind(this), 1000, 5);
     };
 
 	var game = new MemoryGame();
@@ -94,16 +94,16 @@ angular.module('memoryMatrixApp')
 	/* Bound functions to view */
 	$scope.userMessage = game._message.init;
 
-    $scope.newRound = function() {
+    $scope.newRound = function () {
         if ($scope.timer.active) return;
         $scope.timer.active = true;
-        game.countDown();
+        game.countDown ();
         game.prepareNewGame();
         game.generateRandomsList();
         game.revealThenHideSelected();
     };
 
-    $scope.endRound = function() {
+    $scope.endRound = function () {
         if ($scope.timer.active) return;
 		game.prepareNewGame();
         $scope.userMessage = game._message.restart;
@@ -118,7 +118,7 @@ angular.module('memoryMatrixApp')
 
 			for (var i=0; i<9; i++) {
 				index = game._secretSelectList[i];
-				if (!$scope.tileStatusList[index].flash){
+				if (!$scope.tileStatusList[index].flash) {
 					$scope.tileStatusList[index].isRevealed = true;
 				}
 			}

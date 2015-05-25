@@ -1,7 +1,20 @@
+<div ng-include="'components/navbar/template.html'"></div>
+
 <div class="game-dashboard-wrapper">
-    <div ng-include="'components/navbar/template.html'"></div>
 
-    <div>Game On!<div>
 
-    <div ng-include="'components/footer/template.html'"></div>
+    <!-- Game Container -->
+	<div class="matrix-wrap">
+		<!-- Tiles -->
+		<tile ng-repeat="tile in tileArray" value="tile" success="successCounter" reveal="revealHidden"></tile>
+	</div>
+
+    <!-- functional buttons -->
+	<div class="tools center">
+        <button ng-click="newRound()">Start Game</button>
+        <button ng-click="endRound()">Stop Game</button>
+	</div>
+
 </div>
+
+<div ng-include="'components/footer/template.html'"></div>

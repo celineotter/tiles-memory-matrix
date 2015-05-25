@@ -8,3 +8,28 @@ body {
     background: linear-gradient(to bottom, #FFFFFF 0%, #F0F0F9) fixed;
     font-family: Helvetica, sans-serif;
 }
+
+.game-dashboard-wrapper {
+    margin-top: 155px;
+    text-align: center;
+}
+
+.matrix-wrap {
+    display: inline-block;
+	border-radius: 10px;
+	background: #60C4E7;
+    height: 400px;
+    width: 400px;
+    padding: 10px;
+    margin-bottom: 30px;
+}
+
+.tile {
+	float: left;
+	cursor: pointer;
+	background-color:#fff;
+	border-radius: 8px;
+    height: 60px;
+    width: 60px;
+	margin: 10px;
+}

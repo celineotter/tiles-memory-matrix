@@ -17,7 +17,7 @@ body {
 .matrix-wrap {
     display: inline-block;
 	border-radius: 10px;
-	background: #39B3CD;
+	background: #46BCE6;
     height: 400px;
     width: 400px;
     padding: 10px;
@@ -34,13 +34,13 @@ body {
 }
 
 .flash {
-    background-color: #DBEE4D;
+    background-color: #E8FF67;
 }
 .incorrect {
     background-color: #F67267;
 }
 .reveal {
-    background-color: #2CF1CC;
+    background-color: #00F7BC;
 }
 
 button {
@@ -78,11 +78,11 @@ button:focus {
     outline: none;
 }
 
-.btn-left {
+.btn-left-margin {
     margin-right: 5px;
 }
 
-.btn-right {
+.btn-right-margin {
     margin-left: 5px;
 }
 

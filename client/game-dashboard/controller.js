@@ -47,7 +47,17 @@ angular.module('memoryMatrixApp')
             takenList.push(target);
         }
     };
-    generateRandomsList();
+
+
+    $scope.newRound = function() {
+        resetGame();
+        $scope.randomlySelectedList = generateRandomList($scope.total);
+        start($scope.total);
+    };
+
+    $scope.endRound = function() {
+        resetGame();
+    };
 
 });
 

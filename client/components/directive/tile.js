@@ -8,7 +8,7 @@ angular.module('memoryMatrixApp')
             reveal: '=',
             timer: '='
         },
-        templateUrl: 'game-dashboard/directive/tile.html',
+        templateUrl: 'components/directive/tile.html',
         link: function ($scope, element, attrs) {
 
             $scope.highlightTile = function() {

@@ -8,14 +8,14 @@ angular.module('memoryMatrixApp')
 	$scope.total = 25;
 	$scope.tileStatusList = [];
     var secretSelectList = [];
-	$scope.successCounter = [0];
+	$scope.success  = {counter: 0};
 
     /* Populate tileStatusList on first load*/
     /* Each index represents the initial tile status in matrix*/
     var prepareNewGame = function (){
         var tile;
         $scope.userMessage = '';
-        $scope.successCounter = [0];
+        $scope.success = {counter: 0};
 
         for (var i=0; i < $scope.total; i++) {
             $scope.tileStatusList[i] = $scope.tileStatusList[i] || {};

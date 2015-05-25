@@ -1,17 +1,13 @@
-nav {
+.navbar {
     height: 95px;
     margin-bottom: 20px;
-    border: 1px solid transparent;
-}
-
-.navbar-default {
-    background-color: #E0E0E7;
-    border-color: #E0E0E7;
+    border: 1px solid #E0E0E7;
+    background-color: #FEFEFE;
+    border-width: 0 0 2px;
 }
 
 .navbar-fixed-top {
     top: 0;
-    border-width: 0 0 1px;
     border-radius: 0;
     position: fixed;
     right: 0;
@@ -19,7 +15,7 @@ nav {
     z-index: 1030;
 }
 
-navbar .container {
+.navbar > .container {
     padding-right: 15px;
     padding-left: 15px;
     margin-right: auto;
@@ -35,7 +31,7 @@ navbar .container {
     line-height: 100px;
     padding-top: 0;
     font-size: 30px;
-    color: #815D74;
+    color: #0081AD;
     text-decoration: none;
     background: 0 0;
 }

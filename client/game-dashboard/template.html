@@ -4,14 +4,16 @@
 
     <!-- functional buttons -->
 	<div class="center">
-        <button class="btn-right" ng-click="newRound()">Start Game</button>
-        <button class="btn-left" ng-click="endRound()">Stop Game</button>
+        <button class="btn-left" ng-click="newRound()">Start Game</button>
+        <button class="btn-right" ng-click="endRound()">Stop Game</button>
 	</div>
 
     <!-- Game Container -->
 	<div class="matrix-wrap">
 		<!-- Tiles -->
-		<tile ng-repeat="tile in tileStatusList" value="tile" success="successCounter" reveal="revealHidden"></tile>
+		<tile ng-repeat="tile in tileStatusList"
+			tile="tile" successCounter="successCounter" revealHidden="revealHidden">
+		</tile>
 	</div>
 
 </div>

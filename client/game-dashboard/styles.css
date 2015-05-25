@@ -34,6 +34,10 @@ body {
 	margin: 10px;
 }
 
+.flash {
+    background-color: yellow;
+}
+
 button {
     color: #fff;
     background-color: #337ab7;
@@ -60,10 +64,10 @@ button {
     border-radius: 5px;
 }
 
-.btn-right {
+.btn-left {
     margin-right: 5px;
 }
 
-.btn-left {
+.btn-right {
     margin-left: 5px;
 }

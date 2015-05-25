@@ -1,5 +1,5 @@
 angular.module('memoryMatrixApp')
-.controller('gameDashboardCtrl', function ($scope) {
+.controller('gameDashboardCtrl', function ($scope, $timeout) {
 
 	$scope.userMessage = "";
 	var successMessage = "Good Job!";
@@ -7,12 +7,12 @@ angular.module('memoryMatrixApp')
 
 	$scope.total = 25;
 	$scope.tileStatusList = [];
-    $scope.randomlySelectedList = [];
+    var secretSelectList = [];
 	$scope.successCounter = [0];
 
     /* Populate tileStatusList on first load*/
     /* Each index represents the initial tile status in matrix*/
-    var initiateNewGame = function (){
+    var prepareNewGame = function (){
         var tile;
         $scope.userMessage = '';
         $scope.successCounter = [0];
@@ -20,45 +20,67 @@ angular.module('memoryMatrixApp')
         for (var i=0; i < $scope.total; i++) {
             $scope.tileStatusList[i] = $scope.tileStatusList[i] || {};
 
-            $scope.tileStatusList[i].robotSelected = false;
-            $scope.tileStatusList[i].userSelected = false;
+            $scope.tileStatusList[i].secretSelected = false;
+            $scope.tileStatusList[i].flash = false;
             $scope.tileStatusList[i].isIncorrect = false;
             $scope.tileStatusList[i].isRevealed = false;
+
         }
     };
-    initiateNewGame();
-
 
     var getRandomTile = function (){
         return Math.floor( Math.random() * $scope.total);
     };
 
-
     var generateRandomsList = function (){
-        var target, takenList = [];
+        var target, secretList = [];
 
         for (var i=0; i<9; i++){
 
-            while (!target || takenList.indexOf(target) !== -1) {
+            while (!target || secretList.indexOf(target) !== -1) {
                 target = getRandomTile();
             }
 
-            $scope.tileStatusList[target].robotSelected = true;
-            takenList.push(target);
+            $scope.tileStatusList[target].secretSelected = true;
+            secretList.push(target);
         }
+        return secretList;
+    };
+
+    /*Go through internally selected list*/
+    /*For each index value, temporarily flash associated tile*/
+    /*Once revealed, cancel their flash parameter*/
+    var revealThenHideSelected = function() {
+        var counter = 0, preSelectedIndex;
+
+        while (counter < secretSelectList.length) {
+            preSelectedIndex = secretSelectList[counter];
+            $scope.tileStatusList[preSelectedIndex].flash = true;
+            counter++;
+        }
+
+        $timeout(function(){
+            while (counter > 0) {
+                counter--;
+                preSelectedIndex = secretSelectList[counter];
+                $scope.tileStatusList[preSelectedIndex].flash = false;
+            }
+        }, 5000, 1);
+
     };
 
 
     $scope.newRound = function() {
-        resetGame();
-        $scope.randomlySelectedList = generateRandomList($scope.total);
-        start($scope.total);
+        prepareNewGame();
+        secretSelectList = generateRandomsList();
+        revealThenHideSelected();
     };
 
     $scope.endRound = function() {
-        resetGame();
+        prepareNewGame();
     };
 
+    prepareNewGame();
 });
 
 
@@ -66,8 +88,12 @@ angular.module('memoryMatrixApp')
 .directive('tile', function () {
 	return {
 	    restrict: 'E',
-		scope: {},
-	    template: "<div class='tile'></div>",
+		scope: {
+            tile: '=',
+            successCounter: '=',
+            revealHidden: '='
+        },
+	    template: "<div class='tile' ng-class='{flash: tile.flash, incorrect: tile.isIncorrect, reveal: tile.isRevealed}' ng-click='highlightTile()'></div>",
 	    link: function ($scope, element, attrs) {}
 	};
 });

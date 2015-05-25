@@ -10,18 +10,17 @@ body {
 }
 
 .game-dashboard-wrapper {
-    margin-top: 140px;
+    margin-top: 130px;
     text-align: center;
 }
 
 .matrix-wrap {
     display: inline-block;
 	border-radius: 10px;
-	background: #60C4E7;
+	background: #39B3CD;
     height: 400px;
     width: 400px;
     padding: 10px;
-    margin-top: 30px;
 }
 
 .tile {
@@ -35,18 +34,18 @@ body {
 }
 
 .flash {
-    background-color: yellow;
+    background-color: #DBEE4D;
 }
 .incorrect {
-    background-color: red;
+    background-color: #F67267;
 }
 .reveal {
-    background-color: green;
+    background-color: #2CF1CC;
 }
 
 button {
     color: #fff;
-    background-color: #337ab7;
+    background-color: #1C82D3;
     border-color: #2e6da4;
 
     display: inline-block;
@@ -54,7 +53,7 @@ button {
     margin-bottom: 0;
     font-size: 14px;
     font-weight: 400;
-    line-height: 1.6;
+    line-height: 2.25;
     text-align: center;
     white-space: nowrap;
     vertical-align: middle;
@@ -67,7 +66,16 @@ button {
     user-select: none;
     background-image: none;
     border: 1px solid transparent;
-    border-radius: 5px;
+    border-radius: 7px;
+    margin: 20px 0;
+}
+
+button:hover {
+    background-color: #2e6da4;
+}
+
+button:focus {
+    outline: none;
 }
 
 .btn-left {
@@ -76,4 +84,9 @@ button {
 
 .btn-right {
     margin-left: 5px;
+}
+
+.user-message {
+    color: #D3411C;
+    font-size: 22px;
 }

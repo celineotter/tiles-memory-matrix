@@ -2,17 +2,16 @@
 
 <div class="game-dashboard-wrapper">
 
+    <!-- functional buttons -->
+	<div class="center">
+        <button class="btn-right" ng-click="newRound()">Start Game</button>
+        <button class="btn-left" ng-click="endRound()">Stop Game</button>
+	</div>
 
     <!-- Game Container -->
 	<div class="matrix-wrap">
 		<!-- Tiles -->
 		<tile ng-repeat="tile in tileArray" value="tile" success="successCounter" reveal="revealHidden"></tile>
-	</div>
-
-    <!-- functional buttons -->
-	<div class="tools center">
-        <button ng-click="newRound()">Start Game</button>
-        <button ng-click="endRound()">Stop Game</button>
 	</div>
 
 </div>

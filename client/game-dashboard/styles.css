@@ -10,7 +10,7 @@ body {
 }
 
 .game-dashboard-wrapper {
-    margin-top: 155px;
+    margin-top: 140px;
     text-align: center;
 }
 
@@ -21,7 +21,7 @@ body {
     height: 400px;
     width: 400px;
     padding: 10px;
-    margin-bottom: 30px;
+    margin-top: 30px;
 }
 
 .tile {
@@ -32,4 +32,38 @@ body {
     height: 60px;
     width: 60px;
 	margin: 10px;
+}
+
+button {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+
+    display: inline-block;
+    padding: 6px 15px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.6;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 5px;
+}
+
+.btn-right {
+    margin-right: 5px;
+}
+
+.btn-left {
+    margin-left: 5px;
 }

@@ -1,23 +1,31 @@
 angular.module('memoryMatrixApp')
 .controller('gameDashboardCtrl', function ($scope, $timeout, $interval) {
 
-	$scope.userMessage = "- Welcome -";
-	var message = {success: "- Good Job -", fail: "- Better luck next time -"};
-
-	$scope.total = 25;
+	/* Shared with tile directive */
 	$scope.tileStatusList = [];
-    var secretSelectList = [];
 	$scope.success  = {counter: 0};
-    var timeLeft = 5;
     $scope.timer = {active: false};
+
+	/* Game controller methods*/
+	var MemoryGame = function () {
+		this._total = 25;
+    	this._secretSelectList = [];
+    	this._timeLeft = 5;
+		this._message = {
+			success: "- Good Job -",
+			fail: "- Better luck next time -",
+			init: "- Start over -",
+			restart: "- Start over -"
+		};
+	};
 
     /* Populate tileStatusList on first load*/
     /* Each index represents the initial tile status in matrix*/
-    var prepareNewGame = function (){
-        var tile;
-        $scope.success = {counter: 0};
+	MemoryGame.prototype.prepareNewGame = function (){
+        this._secretSelectList = [];
+		$scope.success.counter = 0;
 
-        for (var i=0; i < $scope.total; i++) {
+        for (var i=0; i < this._total; i++) {
             $scope.tileStatusList[i] = $scope.tileStatusList[i] || {};
 
             $scope.tileStatusList[i].secretSelected = false;
@@ -27,91 +35,93 @@ angular.module('memoryMatrixApp')
         }
     };
 
-    var getRandomTile = function (){
-        return Math.floor( Math.random() * $scope.total);
+	MemoryGame.prototype.getRandomTile = function (){
+        return Math.floor( Math.random() * this._total);
     };
 
-    var generateRandomsList = function (){
-        var target, secretList = [];
+	MemoryGame.prototype.generateRandomsList = function (){
+        var target;
 
         for (var i=0; i<9; i++){
 
-            while (!target || secretList.indexOf(target) !== -1) {
-                target = getRandomTile();
+            while (!target || this._secretSelectList.indexOf(target) !== -1) {
+                target = this.getRandomTile();
             }
 
+            this._secretSelectList.push(target);
             $scope.tileStatusList[target].secretSelected = true;
-            secretList.push(target);
         }
-        return secretList;
     };
 
-    /*Go through internally selected list*/
-    /*For each index value, temporarily flash associated tile*/
-    /*Once revealed, cancel their flash parameter*/
-    var revealThenHideSelected = function() {
-        var counter = 0, preSelectedIndex;
+    /* Go through internally selected list */
+    /* For each index value, temporarily flash associated tile */
+    /* Once revealed, cancel their flash parameter */
+	MemoryGame.prototype.revealThenHideSelected = function() {
+        var index = 0, preSelectedIndex;
 
-        while (counter < secretSelectList.length) {
-            preSelectedIndex = secretSelectList[counter];
+        while (index < this._secretSelectList.length) {
+            preSelectedIndex = this._secretSelectList[index];
             $scope.tileStatusList[preSelectedIndex].flash = true;
-            counter++;
+            index++;
         }
 
         $timeout(function(){
-            while (counter > 0) {
-                counter--;
-                preSelectedIndex = secretSelectList[counter];
+            while (index > 0) {
+                index--;
+                preSelectedIndex = this._secretSelectList[index];
                 $scope.tileStatusList[preSelectedIndex].flash = false;
             }
 
-        }, 5000, 1);
-
+        }.bind(this), 5000, 1);
     };
 
-    var countDown = function () {
+	MemoryGame.prototype.countDown = function () {
         $interval(function(numb){
-            if (timeLeft !== 1) {
-                $scope.userMessage = "- " + --timeLeft + " seconds left -";
+            if (this._timeLeft !== 1) {
+                $scope.userMessage = "- " + --this._timeLeft + " seconds left -";
             } else {
-                timeLeft = 5;
+                this._timeLeft = 5;
                 $scope.userMessage = "- Start your selections now - ";
                 $scope.timer.active = false;
             }
-        }, 1000, 5);
+        }.bind(this), 1000, 5);
     };
 
+	var game = new MemoryGame();
+	game.prepareNewGame();
+
+	/****************************/
+	/* Bound functions to view */
+	$scope.userMessage = game._message.init;
 
     $scope.newRound = function() {
         if ($scope.timer.active) return;
         $scope.timer.active = true;
-        countDown();
-        prepareNewGame();
-        secretSelectList = generateRandomsList();
-        revealThenHideSelected();
+        game.countDown();
+        game.prepareNewGame();
+        game.generateRandomsList();
+        game.revealThenHideSelected();
     };
 
     $scope.endRound = function() {
         if ($scope.timer.active) return;
-        prepareNewGame();
-        $scope.userMessage = "- Start over -";
+		game.prepareNewGame();
+        $scope.userMessage = game._message.restart;
     };
 
     $scope.revealSuccess = function (success) {
         if (success) {
-			$scope.userMessage = message.success;
+			$scope.userMessage = game._message.success;
 		} else {
-			$scope.userMessage = message.fail;
+			$scope.userMessage = game._message.fail;
 			var index;
 
 			for (var i=0; i<9; i++) {
-				index = secretSelectList[i];
+				index = game._secretSelectList[i];
 				if (!$scope.tileStatusList[index].flash){
 					$scope.tileStatusList[index].isRevealed = true;
 				}
 			}
 		}
     };
-
-    prepareNewGame();
 });

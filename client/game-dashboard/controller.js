@@ -27,6 +27,28 @@ angular.module('memoryMatrixApp')
         }
     };
     initiateNewGame();
+
+
+    var getRandomTile = function (){
+        return Math.floor( Math.random() * $scope.total);
+    };
+
+
+    var generateRandomsList = function (){
+        var target, takenList = [];
+
+        for (var i=0; i<9; i++){
+
+            while (!target || takenList.indexOf(target) !== -1) {
+                target = getRandomTile();
+            }
+
+            $scope.tileStatusList[target].robotSelected = true;
+            takenList.push(target);
+        }
+    };
+    generateRandomsList();
+
 });
 
 

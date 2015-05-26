@@ -4,6 +4,7 @@ angular.module('memoryMatrixApp')
 
     var Game = function () {
         this._tiles = [];
+        this._blockUserClick = { active: false };
         this._successClickCounter = 0;
         this._message = {
             success: "- Great Job -",
@@ -14,36 +15,28 @@ angular.module('memoryMatrixApp')
 
         this._createBoard();
 
-        $rootScope.$on('correctTileClicked', (function (){
-            if (this._successClickCounter === 8) {
-                this.userMessage = this._message.success;
-            }
-            this._successClickCounter++;
-        }).bind(this));
+        $rootScope.$on('correctTileClicked', this.correctTileClicked.bind(this));
 
-        $rootScope.$on('incorrectTileClicked', (function(){
-            if(this._successClickCounter >= 9) return;
-            this._revealAll();
-            this.userMessage = this._message.fail;
-        }).bind(this));
+        $rootScope.$on('incorrectTileClicked', this.incorrectTileClicked.bind(this));
     };
 
     Game.prototype._createBoard = function () {
         for (var i=0; i < 25; i++) {
-            this._tiles.push(new Tile());
+            this._tiles.push(new Tile(this._blockUserClick));
         }
     };
 
     Game.prototype.start = function () {
-        // NOTE: if no-click = active return
-        this.clear();
+        if(this._blockUserClick.active) return;
+        this.clear(true);
         this._selectRandomTiles();
         this._revealThenHideSelected();
     };
 
-    Game.prototype.clear = function () {
-        // NOTE: if !fromStart & no-click = active return
-        // else NOTE: alert no-click = active
+    Game.prototype.clear = function (fromStart) {
+        if (this._blockUserClick.active) return;
+        if (fromStart) this._blockUserClick.active = true;
+
         this._successClickCounter = 0;
         this.userMessage = this._message.init;
         this._tiles.forEach(function (tile) {
@@ -80,11 +73,25 @@ angular.module('memoryMatrixApp')
         this._tiles.forEach(function(tile){
             tile.hide();
         });
+        this._blockUserClick.active = false;
     };
 
     Game.prototype._revealThenHideSelected = function () {
         this._revealAll();
 		$timeout(this._hideAll.bind(this), 5000);
+    };
+
+    Game.prototype.correctTileClicked = function () {
+        if (this._successClickCounter === 8) {
+            this.userMessage = this._message.success;
+        }
+        this._successClickCounter++;
+    };
+
+    Game.prototype.incorrectTileClicked = function () {
+        if(this._successClickCounter >= 9) return;
+        this._revealAll();
+        this.userMessage = this._message.fail;
     };
 
     return Game;

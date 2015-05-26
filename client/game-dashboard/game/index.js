@@ -1,10 +1,31 @@
 angular.module('memoryMatrixApp')
 
-.factory('Game', function (Tile, $timeout) {
+.factory('Game', function (Tile, $timeout, $rootScope) {
 
     var Game = function () {
         this._tiles = [];
+        this._successClickCounter = 0;
+        this._message = {
+            success: "- Great Job -",
+            fail: "- Better luck next time -",
+            init: "- Get ready to start a new round-",
+        };
+        this.userMessage = this._message.init;
+
         this._createBoard();
+
+        $rootScope.$on('correctTileClicked', (function (){
+            if (this._successClickCounter === 8) {
+                this.userMessage = this._message.success;
+            }
+            this._successClickCounter++;
+        }).bind(this));
+
+        $rootScope.$on('incorrectTileClicked', (function(){
+            if(this._successClickCounter >= 9) return;
+            this._revealAll();
+            this.userMessage = this._message.fail;
+        }).bind(this));
     };
 
     Game.prototype._createBoard = function () {
@@ -14,13 +35,17 @@ angular.module('memoryMatrixApp')
     };
 
     Game.prototype.start = function () {
+        // NOTE: if no-click = active return
         this.clear();
         this._selectRandomTiles();
         this._revealThenHideSelected();
-
     };
 
     Game.prototype.clear = function () {
+        // NOTE: if !fromStart & no-click = active return
+        // else NOTE: alert no-click = active
+        this._successClickCounter = 0;
+        this.userMessage = this._message.init;
         this._tiles.forEach(function (tile) {
             tile.reset();
         });
@@ -49,13 +74,13 @@ angular.module('memoryMatrixApp')
         this._tiles.forEach(function(tile){
             tile.reveal();
         });
-    }
+    };
 
     Game.prototype._hideAll = function () {
         this._tiles.forEach(function(tile){
             tile.hide();
         });
-    }
+    };
 
     Game.prototype._revealThenHideSelected = function () {
         this._revealAll();

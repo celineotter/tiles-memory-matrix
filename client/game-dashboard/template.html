@@ -10,9 +10,10 @@
 	</div>
 
     <!-- Game Container -->
-	<div class="matrix-wrap">
+	<div class="board">
 		<!-- Tiles -->
 		<tile ng-repeat="tile in game._tiles"></tile>
+		<div class="board-lock" ng-if="game._lock"></div>
 	</div>
 
 </div>

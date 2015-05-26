@@ -2,11 +2,10 @@ angular.module('memoryMatrixApp')
 
 .factory('Tile', function ($rootScope) {
 
-    var Tile = function (blockUserClick) {
+    var Tile = function () {
         this._isShowing = false;
         this._isRevealed = false;
         this._isCorrectAnswer = false;
-        this._blockUserClick = blockUserClick;
     };
 
     Tile.prototype.reveal = function () {
@@ -19,7 +18,7 @@ angular.module('memoryMatrixApp')
 
     // TODO: write test for this
     Tile.prototype.show = function () {
-        if(this._isShowing || this._blockUserClick.active) return;
+        if(this._isShowing) return;
         this._isShowing = true;
 
         if(this._isCorrectAnswer){

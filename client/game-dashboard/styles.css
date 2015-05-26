@@ -14,13 +14,24 @@ body {
     text-align: center;
 }
 
-.matrix-wrap {
+.board {
+    position: relative;
     display: inline-block;
 	border-radius: 10px;
 	background: #46BCE6;
     height: 400px;
     width: 400px;
     padding: 10px;
+}
+
+.board-lock {
+	border-radius: 10px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    z-index: 1000;
 }
 
 button {

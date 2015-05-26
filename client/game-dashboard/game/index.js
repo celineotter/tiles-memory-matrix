@@ -30,12 +30,12 @@ angular.module('memoryMatrixApp')
 
     Game.prototype.start = function () {
         if(this._lock) return;
-        this.clear(true);
+        this.clear();
         this._selectRandomTiles();
         this._revealThenHideSelected();
     };
 
-    Game.prototype.clear = function (fromStart) {
+    Game.prototype.clear = function () {
         if (this._lock) return;
 
         this._successClickCounter = 0;

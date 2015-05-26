@@ -6,7 +6,7 @@ Tiles Memory Matrix is an interactive memory game.
 - These will be presented to the user for a short period of time (5 secs) before disappearing.
 - The user must reconstruct the pattern to win the round.
 
-# npm install dependencies
+# install dependencies of app
     $ npm install
 
 # to run the app:
@@ -14,3 +14,6 @@ Tiles Memory Matrix is an interactive memory game.
 
 # open browser:
     http://localhost:8000/
+
+# run unit tests:
+    karma start

@@ -1,6 +1,6 @@
 angular.module('memoryMatrixApp')
 
-.factory('Tile', function () {
+.factory('Tile', function ($rootScope) {
 
     var Tile = function () {
         this._isShowing = false;
@@ -17,7 +17,14 @@ angular.module('memoryMatrixApp')
     };
 
     Tile.prototype.show = function () {
+        if(this._isShowing) return;
         this._isShowing = true;
+
+        if(this._isCorrectAnswer){
+            $rootScope.$broadcast('correctTileClicked');
+        } else {
+            $rootScope.$broadcast('incorrectTileClicked');
+        }
     };
 
     Tile.prototype.setAsCorrectAnswer = function () {

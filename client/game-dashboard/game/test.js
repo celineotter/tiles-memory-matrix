@@ -85,7 +85,7 @@ describe('Game', function () {
 
         describe('.incorrectTileClicked()', function () {
 
-            it('broadcasts correct tile is clicked', inject(function(Game, $rootScope){
+            it('broadcasts incorrect tile is clicked', inject(function(Game, $rootScope){
                 var spy = sinon.spy(Game.prototype, 'incorrectTileClicked');
 
                 var game = new Game();

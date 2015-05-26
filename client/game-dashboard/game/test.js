@@ -44,7 +44,7 @@ describe('Game', function () {
             expect(count).to.equal(9);
         }));
 
-        it('_revealAll(), _hideAll(), _revealThenHideSelected(),  reveals tiles for 5 seconds', inject(function(Game, $timeout){
+        it('_revealAll(), _hideAll(), _revealThenHideSelected(),  reveals tiles for 5 seconds', inject(function(Game, $interval){
             var count;
             var game = new Game();
             game.start();
@@ -58,7 +58,7 @@ describe('Game', function () {
             }, 0);
 
             expect(count).to.equal(25);
-            $timeout.flush();
+            $interval.flush(5000);
 
             count = game._tiles.reduce(function(sum, tile){
                 if(tile._isRevealed){
@@ -67,7 +67,6 @@ describe('Game', function () {
                     return sum;
                 }
             }, 0);
-
             expect(count).to.equal(0);
         }));
     });

@@ -14,9 +14,9 @@ describe('Game', function () {
 
         it('clears board', inject(function(Game, Tile){
             var game = new Game();
-            game._tiles[0].show();
+            game._tiles[0].click();
             game.clear();
-            expect(game._tiles[0]).to.have.property('_isShowing', false);
+            expect(game._tiles[0]).to.have.property('_isClicked', false);
         }));
     });
 
@@ -24,9 +24,9 @@ describe('Game', function () {
 
         it('starts game', inject(function(Game, Tile){
             var game = new Game();
-            game._tiles[0].show();
+            game._tiles[0].click();
             game.start();
-            expect(game._tiles[0]).to.have.property('_isShowing', false);
+            expect(game._tiles[0]).to.have.property('_isClicked', false);
         }));
 
         it('_selectRandomTiles(), _getRandomTile(), selects 9 random tiles', inject(function(Game, Tile){

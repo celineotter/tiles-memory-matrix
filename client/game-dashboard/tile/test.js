@@ -2,10 +2,10 @@ describe('Tile', function () {
 
     beforeEach(module('memoryMatrixApp'));
 
-    it('new Tile(), defaults to not showing', inject(function(Tile){
+    it('new Tile(), defaults to not clicked', inject(function(Tile){
         var tile = new Tile();
 
-        expect(tile._isShowing).to.be.false;
+        expect(tile._isClicked).to.be.false;
     }));
 
     it('new Tile(), defaults to not correct', inject(function(Tile){
@@ -39,7 +39,7 @@ describe('Tile', function () {
     });
 
     describe('.setAsCorrectAnswer()', function () {
-        it('show the tile', inject(function(Tile){
+        it('click the tile', inject(function(Tile){
             var tile = new Tile();
             tile.setAsCorrectAnswer();
 
@@ -48,27 +48,27 @@ describe('Tile', function () {
     });
 
     describe('.reset()', function () {
-        it('show the tile', inject(function(Tile){
+        it('click the tile', inject(function(Tile){
             var tile = new Tile({active: false});
-            tile.show();
+            tile.click();
             tile.setAsCorrectAnswer();
             tile.reveal();
             tile.reset();
 
-            expect(tile._isShowing).to.be.false;
+            expect(tile._isClicked).to.be.false;
             expect(tile._isRevealed).to.be.false;
             expect(tile._isCorrectAnswer).to.be.false;
         }));
     });
 
-    describe('.show()', function () {
+    describe('.click()', function () {
 
         it('broadcasts correct tile is clicked', inject(function(Game, $rootScope){
             var spy = sinon.spy($rootScope, '$broadcast');
 
             var game = new Game();
             game._tiles[0].setAsCorrectAnswer();
-            game._tiles[0].show();
+            game._tiles[0].click();
 
             expect(spy).to.have.been.calledWith('correctTileClicked');
         }));
@@ -77,7 +77,7 @@ describe('Tile', function () {
             var spy = sinon.spy($rootScope, '$broadcast');
 
             var game = new Game();
-            game._tiles[0].show();
+            game._tiles[0].click();
 
             expect(spy).to.have.been.calledWith('incorrectTileClicked');
         }));

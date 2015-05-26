@@ -3,7 +3,7 @@ angular.module('memoryMatrixApp')
 .factory('Tile', function ($rootScope) {
 
     var Tile = function () {
-        this._isShowing = false;
+        this._isClicked = false;
         this._isRevealed = false;
         this._isCorrectAnswer = false;
     };
@@ -16,9 +16,9 @@ angular.module('memoryMatrixApp')
         this._isRevealed = false;
     };
 
-    Tile.prototype.show = function () {
-        if(this._isShowing) return;
-        this._isShowing = true;
+    Tile.prototype.click = function () {
+        if(this._isClicked) return;
+        this._isClicked = true;
 
         if(this._isCorrectAnswer){
             $rootScope.$broadcast('correctTileClicked');
@@ -32,7 +32,7 @@ angular.module('memoryMatrixApp')
     };
 
     Tile.prototype.reset = function () {
-        this._isShowing = false;
+        this._isClicked = false;
         this._isRevealed = false;
         this._isCorrectAnswer = false;
     };

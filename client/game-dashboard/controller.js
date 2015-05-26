@@ -1,11 +1,13 @@
 angular.module('memoryMatrixApp')
-.controller('gameDashboardCtrl', function ($scope, $timeout, $interval) {
+.controller('gameDashboardCtrl', function ($scope, $interval) {
 
+	/******************************/
 	/* Shared with tile directive */
 	$scope.tileStatusList = [];
 	$scope.success  = {counter: 0};
     $scope.timer = {active: false};
 
+	/**************************/
 	/* Game controller methods*/
 	var MemoryGame = function () {
 		this._total = 25;
@@ -53,6 +55,7 @@ angular.module('memoryMatrixApp')
         }
     };
 
+	/***************************************/
     /* Go through internally selected list */
     /* For each index value, temporarily flash associated tile */
     /* Once revealed, cancel their flash parameter */
@@ -65,24 +68,19 @@ angular.module('memoryMatrixApp')
             index++;
         }
 
-        $timeout((function () {
-            while (index > 0) {
-                index--;
-                preSelectedIndex = this.secretSelectList[index];
-                $scope.tileStatusList[preSelectedIndex].flash = false;
-            }
-
-        }).bind(this), 5000, 1);
-    };
-
-	MemoryGame.prototype.countDown = function () {
-        $interval((function (numb) {
+		$interval((function (numb) {
             if (this._timeLeft !== 1) {
                 $scope.userMessage = "- " + --this._timeLeft + " seconds left -";
             } else {
-                this._timeLeft = 5;
+	            while (index > 0) {
+	                index--;
+	                preSelectedIndex = this.secretSelectList[index];
+	                $scope.tileStatusList[preSelectedIndex].flash = false;
+	            }
+
                 $scope.userMessage = "- Start your selections now - ";
                 $scope.timer.active = false;
+                this._timeLeft = 5;
             }
         }).bind(this), 1000, 5);
     };
@@ -90,14 +88,14 @@ angular.module('memoryMatrixApp')
 	var game = new MemoryGame();
 	game.prepareNewGame();
 
-	/****************************/
+
+	/***************************/
 	/* Bound functions to view */
 	$scope.userMessage = game.message.init;
 
     $scope.newRound = function () {
         if ($scope.timer.active) return;
         $scope.timer.active = true;
-        game.countDown();
         game.prepareNewGame();
         game.generateRandomTiles();
         game.revealThenHideSelected();

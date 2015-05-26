@@ -1,17 +1,19 @@
 angular.module('memoryMatrixApp')
 
-.factory('Game', function (Tile, $timeout, $rootScope) {
+.factory('Game', function (Tile, $interval, $rootScope) {
 
     var Game = function () {
         this._tiles = [];
         this._lock = false;
         this._successClickCounter = 0;
-        this._message = {
+        this._messages = {
+            init: "- Get ready to start a new round -",
+            countDown: " seconds left -",
+            inProgress: "- Find the hidden tiles -",
             success: "- Great Job -",
             fail: "- Better luck next time -",
-            init: "- Get ready to start a new round-",
         };
-        this.userMessage = this._message.init;
+        this.userMessage = this._messages.init;
 
         this._createBoard();
 
@@ -37,7 +39,7 @@ angular.module('memoryMatrixApp')
         if (this._lock) return;
 
         this._successClickCounter = 0;
-        this.userMessage = this._message.init;
+        this.userMessage = this._messages.init;
         this._tiles.forEach(function (tile) {
             tile.reset();
         });
@@ -73,18 +75,28 @@ angular.module('memoryMatrixApp')
             tile.hide();
         });
         this._lock = false;
+        this.userMessage = this._messages.inProgress;
     };
 
     Game.prototype._revealThenHideSelected = function () {
+        var count = 5;
         this._lock = true;
         this._revealAll();
-		$timeout(this._hideAll.bind(this), 5000);
+        this.userMessage = '- ' + count + this._messages.countDown;
+        
+		$interval((function () {
+            if(count === 1){
+                this._hideAll();
+            } else {
+                this.userMessage = '- ' + --count + this._messages.countDown;
+            }
+        }).bind(this), 1000, 5);
     };
 
     // TODO: write test for this
     Game.prototype.correctTileClicked = function () {
         if (this._successClickCounter === 8) {
-            this.userMessage = this._message.success;
+            this.userMessage = this._messages.success;
         }
         this._successClickCounter++;
     };
@@ -93,7 +105,7 @@ angular.module('memoryMatrixApp')
     Game.prototype.incorrectTileClicked = function () {
         if(this._successClickCounter >= 9) return;
         this._revealAll();
-        this.userMessage = this._message.fail;
+        this.userMessage = this._messages.fail;
     };
 
     return Game;

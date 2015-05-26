@@ -49,7 +49,6 @@ angular.module('memoryMatrixApp')
         return Math.floor( Math.random() * 25);
     };
 
-    // TODO: write test for this
     Game.prototype._selectRandomTiles = function () {
         var target, selected = [];
 
@@ -83,7 +82,7 @@ angular.module('memoryMatrixApp')
         this._lock = true;
         this._revealAll();
         this.userMessage = '- ' + count + this._messages.countDown;
-        
+
 		$interval((function () {
             if(count === 1){
                 this._hideAll();
@@ -93,7 +92,6 @@ angular.module('memoryMatrixApp')
         }).bind(this), 1000, 5);
     };
 
-    // TODO: write test for this
     Game.prototype.correctTileClicked = function () {
         if (this._successClickCounter === 8) {
             this.userMessage = this._messages.success;
@@ -101,7 +99,6 @@ angular.module('memoryMatrixApp')
         this._successClickCounter++;
     };
 
-    // TODO: write test for this
     Game.prototype.incorrectTileClicked = function () {
         if(this._successClickCounter >= 9) return;
         this._revealAll();

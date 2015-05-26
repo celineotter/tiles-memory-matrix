@@ -69,6 +69,32 @@ describe('Game', function () {
             }, 0);
             expect(count).to.equal(0);
         }));
+
+        describe('.correctTileClicked()', function () {
+
+            it('broadcasts correct tile is clicked', inject(function(Game, $rootScope){
+                var spy = sinon.spy(Game.prototype, 'correctTileClicked');
+
+                var game = new Game();
+                $rootScope.$broadcast('correctTileClicked');
+
+                expect(spy).to.have.been.called;
+                expect(game._successClickCounter).to.equal(1);
+            }));
+        });
+
+        describe('.incorrectTileClicked()', function () {
+
+            it('broadcasts correct tile is clicked', inject(function(Game, $rootScope){
+                var spy = sinon.spy(Game.prototype, 'incorrectTileClicked');
+
+                var game = new Game();
+                $rootScope.$broadcast('incorrectTileClicked');
+
+                expect(spy).to.have.been.called;
+                expect(game.userMessage).to.equal('- Better luck next time -');
+            }));
+        });
     });
 
 });

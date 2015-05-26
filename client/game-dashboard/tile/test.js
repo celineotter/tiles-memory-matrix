@@ -60,4 +60,26 @@ describe('Tile', function () {
             expect(tile._isCorrectAnswer).to.be.false;
         }));
     });
+
+    describe('.show()', function () {
+
+        it('broadcasts correct tile is clicked', inject(function(Game, $rootScope){
+            var spy = sinon.spy($rootScope, '$broadcast');
+
+            var game = new Game();
+            game._tiles[0].setAsCorrectAnswer();
+            game._tiles[0].show();
+
+            expect(spy).to.have.been.calledWith('correctTileClicked');
+        }));
+
+        it('broadcasts incorrect tile is clicked', inject(function(Game, $rootScope){
+            var spy = sinon.spy($rootScope, '$broadcast');
+
+            var game = new Game();
+            game._tiles[0].show();
+
+            expect(spy).to.have.been.calledWith('incorrectTileClicked');
+        }));
+    });
 });

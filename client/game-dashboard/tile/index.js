@@ -16,7 +16,6 @@ angular.module('memoryMatrixApp')
         this._isRevealed = false;
     };
 
-    // TODO: write test for this
     Tile.prototype.show = function () {
         if(this._isShowing) return;
         this._isShowing = true;

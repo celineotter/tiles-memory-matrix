@@ -2,19 +2,19 @@ describe('Tile', function () {
 
     beforeEach(module('memoryMatrixApp'));
 
-    it('defaults to not showing', inject(function(Tile){
+    it('new Tile(), defaults to not showing', inject(function(Tile){
         var tile = new Tile();
 
         expect(tile._isShowing).to.be.false;
     }));
 
-    it('defaults to not correct', inject(function(Tile){
+    it('new Tile(), defaults to not correct', inject(function(Tile){
         var tile = new Tile();
 
         expect(tile._isCorrectAnswer).to.be.false;
     }));
 
-    it('defaults to not revealed', inject(function(Tile){
+    it('new Tile(), defaults to not revealed', inject(function(Tile){
         var tile = new Tile();
 
         expect(tile._isRevealed).to.be.false;
@@ -49,7 +49,7 @@ describe('Tile', function () {
 
     describe('.reset()', function () {
         it('show the tile', inject(function(Tile){
-            var tile = new Tile();
+            var tile = new Tile({active: false});
             tile.show();
             tile.setAsCorrectAnswer();
             tile.reveal();

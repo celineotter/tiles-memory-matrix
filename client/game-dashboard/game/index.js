@@ -81,6 +81,7 @@ angular.module('memoryMatrixApp')
 		$timeout(this._hideAll.bind(this), 5000);
     };
 
+    // TODO: write test for this
     Game.prototype.correctTileClicked = function () {
         if (this._successClickCounter === 8) {
             this.userMessage = this._message.success;
@@ -88,6 +89,7 @@ angular.module('memoryMatrixApp')
         this._successClickCounter++;
     };
 
+    // TODO: write test for this
     Game.prototype.incorrectTileClicked = function () {
         if(this._successClickCounter >= 9) return;
         this._revealAll();

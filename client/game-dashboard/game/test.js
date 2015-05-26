@@ -29,7 +29,7 @@ describe('Game', function () {
             expect(game._tiles[0]).to.have.property('_isShowing', false)
         }));
 
-        it('selects 9 random tiles', inject(function(Game, Tile){
+        it('_selectRandomTiles(), _getRandomTile(), selects 9 random tiles', inject(function(Game, Tile){
             var game = new Game();
             game.start();
 
@@ -44,7 +44,7 @@ describe('Game', function () {
             expect(count).to.equal(9);
         }));
 
-        it('reveals tiles for 5 seconds', inject(function(Game, $timeout){
+        it('_revealAll(), _hideAll(), _revealThenHideSelected(),  reveals tiles for 5 seconds', inject(function(Game, $timeout){
             var count;
             var game = new Game();
             game.start();

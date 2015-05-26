@@ -1,0 +1,6 @@
+<div class='tile'
+    ng-class='{flash: tile._isShowing && tile._isCorrectAnswer,
+        incorrect: tile._isShowing && !tile._isCorrectAnswer,
+        reveal: tile._isRevealed && tile._isCorrectAnswer}'
+    ng-click='tile.show()'>
+</div>

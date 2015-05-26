@@ -8,12 +8,12 @@
 	margin: 10px;
 }
 
-.flash {
-    background-color: #E8FF67;
-}
 .incorrect {
     background-color: #F67267;
 }
 .reveal {
     background-color: #00F7BC;
+}
+.flash {
+    background-color: #E8FF67;
 }

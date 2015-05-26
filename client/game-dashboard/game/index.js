@@ -7,7 +7,7 @@ angular.module('memoryMatrixApp')
         this._lock = false;
         this._successClickCounter = 0;
         this._messages = {
-            init: "- Get ready to start a new round -",
+            init: "- Ready to start a new round? -",
             countDown: " seconds left -",
             inProgress: "- Find the hidden tiles -",
             success: "- Great Job -",

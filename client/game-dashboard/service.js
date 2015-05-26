@@ -20,6 +20,16 @@ angular.module('memoryMatrixApp')
         this._isShowing = true;
     };
 
+    Factory.prototype.setAsCorrectAnswer = function () {
+        this._isCorrectAnswer = true;
+    };
+
+    Factory.prototype.reset = function () {
+        this._isShowing = false;
+        this._isRevealed = false;
+        this._isCorrectAnswer = false;
+    };
+
     return Factory;
 });
 

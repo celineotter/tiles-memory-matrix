@@ -38,12 +38,26 @@ describe('Tile', function () {
         }));
     });
 
-    describe('.show()', function () {
+    describe('.setAsCorrectAnswer()', function () {
+        it('show the tile', inject(function(Tile){
+            var tile = new Tile();
+            tile.setAsCorrectAnswer();
+
+            expect(tile._isCorrectAnswer).to.be.true;
+        }));
+    });
+
+    describe('.reset()', function () {
         it('show the tile', inject(function(Tile){
             var tile = new Tile();
             tile.show();
+            tile.setAsCorrectAnswer();
+            tile.reveal();
+            tile.reset();
 
-            expect(tile._isShowing).to.be.true;
+            expect(tile._isShowing).to.be.false;
+            expect(tile._isRevealed).to.be.false;
+            expect(tile._isCorrectAnswer).to.be.false;
         }));
     });
 });

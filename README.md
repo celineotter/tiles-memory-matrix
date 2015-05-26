@@ -25,6 +25,8 @@ Will install:
 - lodash
 - mocha
 - normalize.css
+- sinon
+- sinon-chai
 
 # To run the app:
     $ grunt connect

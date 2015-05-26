@@ -4,7 +4,7 @@
 
     <!-- functional buttons -->
 	<div class="center">
-		<!-- <div class='user-message'>{{userMessage}}</div> -->
+		<div class='user-message'>{{game.userMessage}}</div>
         <button class="btn-right-margin" ng-click="game.start()">Start Game</button>
         <button class="btn-left-margin" ng-click="game.clear()">Stop Game</button>
 	</div>
@@ -12,15 +12,7 @@
     <!-- Game Container -->
 	<div class="matrix-wrap">
 		<!-- Tiles -->
-		<!-- <tile ng-repeat="tile in tiles"
-			tile="tile" success="success" reveal="revealSuccess" timer="timer">
-		</tile> -->
-		<div ng-repeat="tile in game._tiles" class='tile'
-		    ng-class='{flash: tile._isShowing && tile._isCorrectAnswer,
-		        incorrect: tile._isShowing && !tile._isCorrectAnswer,
-		        reveal: tile._isRevealed && tile._isCorrectAnswer}'
-		    ng-click='tile.show()'>
-		</div>
+		<tile ng-repeat="tile in game._tiles"></tile>
 	</div>
 
 </div>

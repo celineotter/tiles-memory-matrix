@@ -16,7 +16,7 @@ describe('Game', function () {
             var game = new Game();
             game._tiles[0].show();
             game.clear();
-            expect(game._tiles[0]).to.have.property('_isShowing', false)
+            expect(game._tiles[0]).to.have.property('_isShowing', false);
         }));
     });
 
@@ -26,7 +26,7 @@ describe('Game', function () {
             var game = new Game();
             game._tiles[0].show();
             game.start();
-            expect(game._tiles[0]).to.have.property('_isShowing', false)
+            expect(game._tiles[0]).to.have.property('_isShowing', false);
         }));
 
         it('_selectRandomTiles(), _getRandomTile(), selects 9 random tiles', inject(function(Game, Tile){

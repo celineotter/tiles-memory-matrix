@@ -23,26 +23,6 @@ body {
     padding: 10px;
 }
 
-.tile {
-	float: left;
-	cursor: pointer;
-	background-color:#fff;
-	border-radius: 8px;
-    height: 60px;
-    width: 60px;
-	margin: 10px;
-}
-
-.flash {
-    background-color: #E8FF67;
-}
-.incorrect {
-    background-color: #F67267;
-}
-.reveal {
-    background-color: #00F7BC;
-}
-
 button {
     color: #fff;
     background-color: #1C82D3;

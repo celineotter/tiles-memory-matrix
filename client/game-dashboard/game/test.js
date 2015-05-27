@@ -29,7 +29,7 @@ describe('Game', function () {
             expect(game._tiles[0]).to.have.property('_isClicked', false);
         }));
 
-        it('_selectRandomTiles(), _getRandomTile(), selects 9 random tiles', inject(function(Game, Tile){
+        it('selects 9 random tiles: _selectRandomTiles(), _getRandomTile()', inject(function(Game, Tile){
             var game = new Game();
             game.start();
 
@@ -44,7 +44,7 @@ describe('Game', function () {
             expect(count).to.equal(9);
         }));
 
-        it('_revealAll(), _hideAll(), _revealThenHideSelected(),  reveals tiles for 5 seconds', inject(function(Game, $interval){
+        it('reveals tiles for 5 seconds: _revealAll(), _hideAll(), _revealThenHideSelected()', inject(function(Game, $interval){
             var count;
             var game = new Game();
             game.start();
